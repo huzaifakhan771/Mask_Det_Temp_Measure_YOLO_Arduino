@@ -70,6 +70,7 @@ def detect(save_img=False):
     img = torch.zeros((1, 3, imgsz, imgsz), device=device)  # init img
     _ = model(img.half() if half else img) if device.type != 'cpu' else None  # run once
     for path, img, im0s, vid_cap in dataset:
+        face_box = True
         temp, tempstr = read_sensor()
         img = torch.from_numpy(img).to(device)
         img = img.half() if half else img.float()  # uint8 to fp16/32
@@ -98,10 +99,11 @@ def detect(save_img=False):
                 try:
                     bbox = list(map(lambda x: int(x), det[0]))
                     print(bbox)
-                    if bbox[0] < wd//4 and bbox[2] > wd//2:
-                        print("GREATERS")
-                        break
-                except Exception as e:
+                    print(wd//5, wd//2.5)
+                    if bbox[0] > wd//5 and bbox[2] < wd//2 and bbox[1] > ht//5.4:
+                        print("SMALLER")
+                        face_box = False
+                except:
                     pass
 
             else:
@@ -112,7 +114,7 @@ def detect(save_img=False):
             txt_path = str(save_dir / 'labels' / p.stem) + ('' if dataset.mode == 'image' else f'_{frame}')  # img.txt
             s += '%gx%g ' % img.shape[2:]  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
-            if len(det):
+            if len(det) and face_box:
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
 
@@ -133,10 +135,10 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         im0 = temp_img
                         plot_one_box(xyxy, tempstr, im0, label=label, color=colors[int(cls)], line_thickness=3)
-            
+
             # try:
-               # bbox = list(map(lambda x : int(x), det[0]))
-               # print("detection", bbox[:4])
+            # bbox = list(map(lambda x : int(x), det[0]))
+            # print("detection", bbox[:4])
             # except:
             #    pass
 
