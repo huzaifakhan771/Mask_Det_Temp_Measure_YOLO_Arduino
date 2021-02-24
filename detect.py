@@ -24,8 +24,8 @@ def read_sensor():
     return int(string), temp_str
 
 def detect(save_img=False):
-    cv2.namedWindow("0", cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty("0", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    # cv2.namedWindow("0", cv2.WND_PROP_FULLSCREEN)
+    # cv2.setWindowProperty("0", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     source, weights, view_img, save_txt, imgsz = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size
     webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(
         ('rtsp://', 'rtmp://', 'http://'))
@@ -100,7 +100,11 @@ def detect(save_img=False):
                     bbox = list(map(lambda x: int(x), det[0]))
                     print(bbox)
                     print(wd//5, wd//2.5)
-                    if bbox[0] > wd//5 and bbox[2] < wd//2 and bbox[1] > ht//5.4:
+                    # if bbox[0] > wd//5 and bbox[2] < wd//2:
+                    cm_scale = 100
+                    area = ((bbox[2] - bbox[0] )*(bbox[3] - bbox[1]))//100
+                    print(f"AREA {area} cm")
+                    if area < 380 and (bbox[0] > 80 or bbox[2] <290):
                         print("SMALLER")
                         face_box = False
                 except:
