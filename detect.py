@@ -14,6 +14,8 @@ from utils.general import check_img_size, non_max_suppression, apply_classifier,
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized
 ser = serial.Serial('/dev/ttyACM0', 9600)
+from tkinter_form_24_feb import *
+
 
 def read_sensor():
     b = ser.readline()         # read a byte string
@@ -98,14 +100,14 @@ def detect(save_img=False):
                 cv2.ellipse(im0, (wd // 2, ht // 2), (wd // 4, ht // 2-10), 0, 0, 360, (120, 150, 50), 2, cv2.LINE_AA)
                 try:
                     bbox = list(map(lambda x: int(x), det[0]))
-                    print(bbox)
-                    print(wd//5, wd//2.5)
+                    # print(bbox)
+                    # print(wd//5, wd//2.5)
                     # if bbox[0] > wd//5 and bbox[2] < wd//2:
                     cm_scale = 100
-                    area = ((bbox[2] - bbox[0] )*(bbox[3] - bbox[1]))//100
-                    print(f"AREA {area} cm")
+                    area = (    (bbox[2] - bbox[0] )*(bbox[3] - bbox[1]))//100
+                    # print(f"AREA {area} cm")
                     if area < 320 and (bbox[0] > 80 or bbox[2] <290):
-                        print("SMALLER")
+                        # print("SMALLER")
                         face_box = False
                 except:
                     pass
@@ -139,6 +141,10 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         im0 = temp_img
                         plot_one_box(xyxy, tempstr, im0, label=label, color=colors[int(cls)], line_thickness=3)
+                        if names[int(cls)] == 'mask' and temp > 1000:
+                            submitpage1()
+                            mainloop()
+                            print("status: ", Status.status)
 
             # try:
             # bbox = list(map(lambda x : int(x), det[0]))

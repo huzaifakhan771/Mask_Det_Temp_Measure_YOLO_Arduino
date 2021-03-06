@@ -3,55 +3,53 @@ qs = ["Did you clear PCR test?", "Did you travel in the past 2 weeks?", "Do you 
 
 from tkinter import *
 
+class Status():
+	status = None
+
 def yes_page1():
-    global status
-    status = "safe"
-    print("yes", status)
+    Status.status = "safe"
+    # print("yes", Status.status)
     page1.destroy()
     submitpage2()
 
 def no_page1():
-    global status
-    status = "not safe"
-    print("no", status)
+    Status.status = "not safe"
+    # print("no", Status.status)
     page1.destroy()
     submitpage2()
 
 def yes_page2():
-    global status
-    status = "not safe"
-    print("yes", status)
+    Status.status = "not safe"
+    # print("yes", Status.status)
     page2.destroy()
     submitpage3()
 
 def no_page2():
     # status = "safe"
-    print("no", status)
+    # print("no", Status.status)
     page2.destroy()
     submitpage3()
 
 def yes_page3():
-    global status
-    status = "not safe"
-    print("yes", status)
+    Status.status = "not safe"
+    # print("yes", Status.status)
     page3.destroy()
     submitpage4()
 
 def no_page3():
     # status = "safe"
-    print("no", status)
+    # print("no", Status.status)
     page3.destroy()
     submitpage4()
 
 def yes_page4():
-    global status
-    status = "not safe"
-    print("yes", status)
+    Status.status = "not safe"
+    # print("yes", Status.status)
     page4.destroy()
 
 def no_page4():
     # status = "safe"
-    print("no", status)
+    # print("no", Status.status)
     page4.destroy()
 
 
@@ -108,7 +106,6 @@ def submitpage4():
 
 
 
-submitpage1()
-mainloop()
-
-print("status = ", status)
+if __name__ == "__main__":
+	submitpage1()
+	mainloop()
