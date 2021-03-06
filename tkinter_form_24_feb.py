@@ -1,7 +1,11 @@
-qs = ["Did you clear PCR test?", "Did you travel in the past 2 weeks?", "Do you have body aches?",
-"Do you have dry cough?", "Do you have any relatives with COVID-19 Symptoms?"]
-
 from tkinter import *
+
+
+qs = []
+with open("form_questions") as reader:
+	for line in reader.readlines():
+		qs.append(line.strip())
+
 
 class Status():
 	status = None
