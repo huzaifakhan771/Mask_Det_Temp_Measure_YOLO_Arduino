@@ -95,7 +95,7 @@ def detect(save_img=False):
                 # im0 = cv2.flip(im0, 1)
                 ht, wd, _ = im0.shape
                 temp_img = im0.copy()
-                cv2.ellipse(im0, (wd // 2, ht // 2), (wd // 4, ht // 2), 0, 0, 360, (120, 150, 50), 2, cv2.LINE_AA)
+                cv2.ellipse(im0, (wd // 2, ht // 2), (wd // 4, ht // 2-10), 0, 0, 360, (120, 150, 50), 2, cv2.LINE_AA)
                 try:
                     bbox = list(map(lambda x: int(x), det[0]))
                     print(bbox)
@@ -104,7 +104,7 @@ def detect(save_img=False):
                     cm_scale = 100
                     area = ((bbox[2] - bbox[0] )*(bbox[3] - bbox[1]))//100
                     print(f"AREA {area} cm")
-                    if area < 380 and (bbox[0] > 80 or bbox[2] <290):
+                    if area < 320 and (bbox[0] > 80 or bbox[2] <290):
                         print("SMALLER")
                         face_box = False
                 except:
