@@ -141,7 +141,7 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         im0 = temp_img
                         plot_one_box(xyxy, tempstr, im0, label=label, color=colors[int(cls)], line_thickness=3)
-                        if names[int(cls)] == 'mask' and temp > 1000:
+                        if names[int(cls)] == 'mask' and temp > 37:
                             submitpage1()
                             mainloop()
                             print("status: ", Status.status)
