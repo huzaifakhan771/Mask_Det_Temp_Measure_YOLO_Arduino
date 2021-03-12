@@ -104,11 +104,15 @@ def detect(save_img=False):
                     # print(wd//5, wd//2.5)
                     # if bbox[0] > wd//5 and bbox[2] < wd//2:
                     cm_scale = 100
-                    area = (    (bbox[2] - bbox[0] )*(bbox[3] - bbox[1]))//100
-                    # print(f"AREA {area} cm")
+                    area = ((bbox[2] - bbox[0] )*(bbox[3] - bbox[1]))//100
+                    print(f"AREA {area} cm")
+                    print(f"xmin: {bbox[0]}, xmax: {bbox[2]}")
+                    print("------------------------")
                     if area < 320 and (bbox[0] > 80 or bbox[2] <290):
                         # print("SMALLER")
                         face_box = False
+                    if names[0] == "nomask" and area > 240:
+                    	face_box = True
                 except:
                     pass
 
