@@ -14,7 +14,7 @@ from utils.general import check_img_size, non_max_suppression, apply_classifier,
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized
 ser = serial.Serial('/dev/ttyACM0', 9600)
-from tkinter_form_24_feb import *
+from tkinter_form import *
 
 
 def read_sensor():

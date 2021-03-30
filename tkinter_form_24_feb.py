@@ -105,8 +105,6 @@ def submitpage4():
     Label(page4, text= qs[3], width = 40, font=("Courier", 50 )).grid(row=0,column=0)
     yes = Button(page4, text = "Yes", command = yes_page4, height=10, width = 40, bg = "black", fg = "white").place(x=340, y=500)
     no = Button(page4, text = "No", command = no_page4, height = 10, width = 40, bg = "black", fg = "white").place(x=700, y=500)
-    # yes.grid(row = 12, column = 11)
-    # no.grid(row = 15, column = 11)
 
 
 

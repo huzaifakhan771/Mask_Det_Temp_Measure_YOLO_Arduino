@@ -1,4 +1,4 @@
-Mask Detection and temperature measurement by using object detection with YOLO and temperature measurement with Arduino by using mlx9064 dci sensor
+Real time mask Detection and human temperature measurement by using deep learning object detection with YOLOv5 and temperature measurement with the contact-less MLX90614-DCI sensor. Arduino is used for the I2C communication between the machine and the temperature sensor.
 
 
 -- Install dependencies with 'pip3 install -r requirements.txt'
