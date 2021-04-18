@@ -97,6 +97,16 @@ def detect(save_img=False):
                 # im0 = cv2.flip(im0, 1)
                 ht, wd, _ = im0.shape
                 temp_img = im0.copy()
+                
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                text_position = wd//7, int(ht*0.08)
+                fontScale = 0.8
+                fontColor = (255,255,255)
+                lineType = 2
+                label = 'Please fill the ellipse to start detection!'
+
+                cv2.putText(im0, label, text_position, 0, fontScale, [0, 0, 0], thickness=2    , lineType=cv2.LINE_AA)
+
                 cv2.ellipse(im0, (wd // 2, ht // 2), (wd // 4, ht // 2-10), 0, 0, 360, (120, 150, 50), 2, cv2.LINE_AA)
                 try:
                     bbox = list(map(lambda x: int(x), det[0]))
@@ -112,7 +122,7 @@ def detect(save_img=False):
                         # print("SMALLER")
                         face_box = False
                     if names[0] == "nomask" and area > 240:
-                    	face_box = True
+                        face_box = True
                 except:
                     pass
 
